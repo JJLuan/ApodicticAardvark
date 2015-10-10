@@ -1,4 +1,4 @@
-package com.example.john.whatever;
+package com.example.john.apodicticaardvark;
 
 import org.junit.Test;
 
