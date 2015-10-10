@@ -1,4 +1,4 @@
-package com.example.john.whatever;
+package com.example.john.apodicticaardvark;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
