@@ -12,13 +12,15 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
-        android:hint="Time" />
+        android:id="@+id/timeText"
+        android:hint="Time"
+        android:inputType="none"
+        android:onClick="selectTimeAndDate" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
+        android:id="@+id/descText"
         android:hint="Description" />
 
     <Button

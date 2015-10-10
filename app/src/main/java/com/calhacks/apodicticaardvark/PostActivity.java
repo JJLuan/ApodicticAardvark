@@ -1,13 +1,18 @@
 package com.calhacks.apodicticaardvark;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TimePicker;
 
 import com.google.gson.Gson;
 
@@ -21,6 +26,7 @@ import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +45,29 @@ public class PostActivity extends Activity {
         String title = ((EditText)findViewById(R.id.titleText)).getText().toString();
         String time = ((EditText)findViewById(R.id.timeText)).getText().toString();
         String description = ((EditText)findViewById(R.id.descText)).getText().toString();
-        poster.execute(title,time,description);
+        poster.execute(title, time, description);
+    }
+
+    public void selectTimeAndDate(View view){
+    }
+
+    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            // Do something with the time chosen by the user
+        }
     }
 
     private class Poster extends AsyncTask<String,Void,String>{
