@@ -1,27 +1,21 @@
-from flask import Flask, url_for, request, g, session, redirect, escape, flash
+from flask import Flask, url_for, request, g, session, redirect, escape, flash, jsonify
 app = Flask(__name__)
 
-class message_db:
-	def __init__(self):
-		messages = []
+message_db = []
 
-	def __repr__(self):
-		s = ''
-		for m in messages:
-			s += str(m) + '\n'
-		return s
-class message:
-	def __init__(self, author_id, title, subject):
-		self.author = author_id
-		self.title = title
-		self.subject = subject
+@app.route('/board/')
+def board():
+	if not message_db:
+		return 'No message yet'
+	return [jsonify(**m) for m in message_db]
 
-@app.route('/')
-def 
-
-@app.route('/post')
-
-
+@app.route('/post/', methods = ['POST', 'GET'])
+def post():
+	if request.method == 'POST':
+		new = request.get_json(force = True)
+		message_db.append(new)
+		print(new)
+		return redirect(url_for(board))
 
 if __name__ == '__main__':
     app.run(debug = False, host = '0.0.0.0')
